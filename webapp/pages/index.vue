@@ -2,18 +2,18 @@
   <div>
   <div id="main" class="flex justify-center flex-col items-center">
         <div class="flex">
-            <input class="m-4">
-            <img src="~assets/magnifying-glass-solid.svg"
-            height="28">
+            <input class="m-4" v-model="searchQuery">
+            <button @click="search">search</button>
         </div>
 
-        <div class="flex flex-col items-center">
-        make this into a movie card component. modify default project card?
-            <div class="">
-            <img src="">
-            insert movie poster</div>
-            <h1 class="text-xl">Movie Title</h1>
-            <h3 class="w-64">Popularity summary Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
+        <div v-if="movieList.length" class="flex flex-col items-center">
+          <div v-for="movie in movieList">
+            <img class="" :src="movie.poster_image_url">
+            <h1 class="text-xl">{{movie.title}}</h1>
+            <h2 class="text-xl">{{movie.popularity_summary}}</h2>
+          </div>
+          
+
 
         </div>
     </div>
@@ -68,6 +68,42 @@ export default {
   name: 'IndexPage',
   components: {
     Card
+  }, 
+  methods: {
+    async search () {
+
+
+
+      
+      try {
+
+        const response = await this.$axios.get('/api', {
+          params: {
+            query: this.searchQuery
+          }
+        });
+
+
+        
+        console.log(response.data)
+        this.movieList = response.data
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }, 
+  data() {
+    return {
+      movieList: [], 
+      searchQuery: ''
+    }
   }
 }
 </script>
+
+<!-- todo 
+1) make the search query work
+2) make the page display the json data as cards
+
+
+-->

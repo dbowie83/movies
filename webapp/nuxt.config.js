@@ -35,9 +35,13 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/buefy
     'nuxt-buefy',
+    '@nuxtjs/axios',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
-}
+  }, 
+
+  serverMiddleware: {
+    '/api': '~/api'
+  },}

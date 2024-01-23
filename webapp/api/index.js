@@ -7,10 +7,9 @@ app.use(express.urlencoded({ extended: true }))
 
 
 app.get('/', async (req, res) => {
-  console.log(req.query.query)
-
-
 	var apiKey = '' //fixme: enter your api key here
+  //fixme: make the API key passed in through a env file
+  console.log(req.query.query)
 
 	//call the search endpoint
 	const fetch = require('node-fetch');
@@ -23,21 +22,14 @@ app.get('/', async (req, res) => {
 		accept: 'application/json',
 		Authorization: 'Bearer ' + apiKey
 	}
-	}; //fixme: make the API key passed in through a env file
-
-// 	fetch(url, options)
-// 	.then(res => res.json())
-// 	.then(json => console.log(json.results.slice(0,10))) //fixme: how to limit it throught the api call itself?? using the page parameter?? The documentation isn't clear. 
-// 	.catch(err => console.error('error:' + err));
-
-
-//   res.send('Hello World!')
+	}; 
 
 try {
     const response = await fetch(url, options);
     const json = await response.json();
 
     //Filter results to only return what we care about
+    //fixme: how to limit it throught the api call itself?? using the page parameter?? The documentation isn't clear. 
     const filteredResults = json.results.slice(0, 10).map(movie => ({
       movie_id: movie.id,
       title: movie.title,

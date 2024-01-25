@@ -2,5 +2,9 @@ The app is currently all in the directory 'webapp'. With more time I'd move it t
 
 
 To run the whole app in dev mode:
-add your api key to the file 'webapp/api/index.js'
-cd into webapp and run 'yarn dev'
+1) install the latest version of node.js
+2) add your api key to the file 'webapp/api/index.js'
+3) install yarn if it's not already installed: "npm install --global yarn"
+4) cd into webapp
+5) run the command: "yarn install"
+6) run the command: "yarn dev"

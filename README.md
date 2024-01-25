@@ -8,3 +8,4 @@ To run the whole app in dev mode:
 4) cd into webapp
 5) run the command: "yarn install"
 6) run the command: "yarn dev"
+7) navigate to http://localhost:3000/ in a web browser
